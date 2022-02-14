@@ -2,7 +2,7 @@
 
 [GitHub CLI] extension for Github repo organization.
 
-By default clones repositories to `$HOME/git/github/<org>/<repo>`.
+By default clones repositories to `$HOME/src/github.com/<org>/<repo>`.
 
 ## Install
 
@@ -26,9 +26,8 @@ gh extension upgrade --all
 ## Configuration
 
 ```bash
-# defaults
-$ORGIT_DIR=$HOME/git
-$ORGIT_GH=$ORGIT_DIR/github
+# default
+$GITHUB_DIR="$HOME/src/github.com"
 ```
 
 ## Commands

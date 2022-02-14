@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
+
 set -e
 
-# config
-[[ -z "${ORGIT_DIR}" ]] && ORGIT_DIR="$HOME/git"
-[[ -z "${ORGIT_GH}" ]] && ORGIT_GH="$ORGIT_DIR/github"
+[[ -z "${GITHUB_DIR}" ]] && ORGIT_DIR="$HOME/src/github.com"
 
 help(){
     echo "Usage: gh clone <org>/<repo>"
@@ -23,7 +22,7 @@ if [[ -z "$org" ]] || [[ -z "$repo" ]]; then
   exit 255
 fi
 
-clone_dest="$ORGIT_GH/$org/$repo"
+clone_dest="$GITHUB_DIR/$org/$repo"
 mkdir -p $clone_dest
 
 gh repo clone $1 $clone_dest
