@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -e
+
+# config
+[[ -z "${ORGIT_DIR}" ]] && ORGIT_DIR="$HOME/git"
+[[ -z "${ORGIT_GH}" ]] && ORGIT_GH="$ORGIT_DIR/github"
+
+help(){
+    echo "Usage: gh clone <org>/<repo>"
+}
+
+if [ ! $# -eq 1 ]; then
+  help
+  exit 255
+fi
+
+org=$(echo $1 | cut -d '/' -f1)
+repo=$(echo $1 | cut -d '/' -f2)
+
+if [[ -z "$org" ]] || [[ -z "$repo" ]]; then
+  echo "$1 is not a valid github repo"
+  help
+  exit 255
+fi
+
+clone_dest="$ORGIT_GH/$org/$repo"
+mkdir -p $clone_dest
+
+gh repo clone $1 $clone_dest
