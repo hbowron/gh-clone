@@ -2,7 +2,7 @@
 
 set -e
 
-[[ -z "${GITHUB_DIR}" ]] && ORGIT_DIR="$HOME/src/github.com"
+[[ -z "${GITHUB_DIR}" ]] && GITHUB_DIR="$HOME/src/github.com"
 
 help(){
     echo "Usage: gh clone <org>/<repo>"
