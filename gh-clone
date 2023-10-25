@@ -13,8 +13,9 @@ if [ ! $# -eq 1 ]; then
   exit 255
 fi
 
-org=$(echo $1 | cut -d '/' -f1)
-repo=$(echo $1 | cut -d '/' -f2)
+IFS='/' read -ra ADDR <<< "$1"
+org="${ADDR[0]}"
+repo="${ADDR[1]}"
 
 if [[ -z "$repo" ]] && [[ -n "${GH_CLONE_DEFAULT_ORG}" ]]; then
   repo=$org
@@ -30,4 +31,4 @@ fi
 clone_dest="$GH_CLONE_DEFAULT_DIR/$org/$repo"
 mkdir -p $clone_dest
 
-gh repo clone $1 $clone_dest
+gh repo clone $org/$repo $clone_dest
