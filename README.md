@@ -26,8 +26,12 @@ gh extension upgrade --all
 ## Configuration
 
 ```bash
-# default
-$GITHUB_DIR="$HOME/src/github.com"
+# if you want to change the default clone directory
+export GH_CLONE_DEFAULT_DIR="$HOME/src/github.com"
+
+# if you want to set a default organization
+export GH_CLONE_DEFAULT_ORG="kubernetes"
+# `gh clone cloud-provider-aws` will clone github.com/kubernetes/cloud-provider-aws
 ```
 
 ## Commands

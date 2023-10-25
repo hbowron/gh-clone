@@ -2,7 +2,7 @@
 
 set -e
 
-[[ -z "${GITHUB_DIR}" ]] && GITHUB_DIR="$HOME/src/github.com"
+[[ -z "${GH_CLONE_DEFAULT_DIR}" ]] && GH_CLONE_DEFAULT_DIR="$HOME/src/github.com"
 
 help(){
     echo "Usage: gh clone <org>/<repo>"
@@ -16,13 +16,18 @@ fi
 org=$(echo $1 | cut -d '/' -f1)
 repo=$(echo $1 | cut -d '/' -f2)
 
+if [[ -z "$repo" ]] && [[ -n "${GH_CLONE_DEFAULT_ORG}" ]]; then
+  repo=$org
+  org="${GH_CLONE_DEFAULT_ORG}"
+fi
+
 if [[ -z "$org" ]] || [[ -z "$repo" ]]; then
   echo "$1 is not a valid github repo"
   help
   exit 255
 fi
 
-clone_dest="$GITHUB_DIR/$org/$repo"
+clone_dest="$GH_CLONE_DEFAULT_DIR/$org/$repo"
 mkdir -p $clone_dest
 
 gh repo clone $1 $clone_dest
